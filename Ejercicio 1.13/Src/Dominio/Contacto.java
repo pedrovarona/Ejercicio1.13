@@ -1,10 +1,11 @@
-package Dominio;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * La clase Contacto representa un contacto con nombre, primer apellido, segundo apellido y número de teléfono.
  */
 public class Contacto implements Serializable {
+
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
@@ -89,7 +90,24 @@ public class Contacto implements Serializable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Contacto contacto = (Contacto) obj;
+        return Objects.equals(nombre, contacto.nombre) &&
+                Objects.equals(primerApellido, contacto.primerApellido) &&
+                Objects.equals(segundoApellido, contacto.segundoApellido) &&
+                Objects.equals(numeroDeTelefono, contacto.numeroDeTelefono);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, primerApellido, segundoApellido, numeroDeTelefono);
+    }
+
+    @Override
     public String toString() {
-        return "Nombre: " + nombre + ", Primer Apellido: " + primerApellido + ", Segundo Apellido: " + segundoApellido + ", Teléfono: " + numeroDeTelefono;
+        return "Nombre: " + nombre + ", Primer Apellido: " + primerApellido +
+                ", Segundo Apellido: " + segundoApellido + ", Teléfono: " + numeroDeTelefono;
     }
 }
