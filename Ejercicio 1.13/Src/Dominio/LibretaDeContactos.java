@@ -1,12 +1,12 @@
-package Dominio;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * La clase LibretaDeContactos gestiona una lista de contactos.
  */
 public class LibretaDeContactos {
-    private ArrayList<Contacto> contactos;  // Se inicializará en el constructor
+    private ArrayList<Contacto> contactos; // Se inicializará en el constructor
 
     /**
      * Constructor de la clase LibretaDeContactos.
@@ -17,6 +17,7 @@ public class LibretaDeContactos {
 
     /**
      * Añade un nuevo contacto a la libreta.
+     *
      * @param contacto El contacto a añadir.
      */
     public void añadirContacto(Contacto contacto) {
@@ -34,6 +35,7 @@ public class LibretaDeContactos {
 
     /**
      * Guarda la lista de contactos en un archivo.
+     *
      * @param nombreArchivo El nombre del archivo en el que se guardarán los contactos.
      */
     public void guardarContactosEnArchivo(String nombreArchivo) {
@@ -47,6 +49,7 @@ public class LibretaDeContactos {
 
     /**
      * Carga la lista de contactos desde un archivo.
+     *
      * @param nombreArchivo El nombre del archivo desde el que se cargarán los contactos.
      */
     public void cargarContactosDesdeArchivo(String nombreArchivo) {
@@ -75,4 +78,23 @@ public class LibretaDeContactos {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Elimina un contacto de la libreta dado su nombre.
+     *
+     * @param nombreContacto El nombre del contacto a eliminar.
+     * @return true si se eliminó correctamente, false si no se encontró el contacto.
+     */
+    public boolean eliminarContacto(String nombreContacto) {
+        Iterator<Contacto> iterator = contactos.iterator();
+        while (iterator.hasNext()) {
+            Contacto contacto = iterator.next();
+            if (contacto.getNombre().equalsIgnoreCase(nombreContacto)) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
